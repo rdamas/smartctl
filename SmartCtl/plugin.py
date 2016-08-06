@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #######################################################################
 #
-#  E2SmartCtl
-#  Version 0.1
+#  SmartCtl
+#  Version 0.2
 #  Support: www.vuplus-support.org
 #
 #  Copyright (c) 2016 by Robert Damas
@@ -32,7 +32,7 @@ import Plugins.Extensions.SmartCtl.SmartCtl as SmartCtl
 from __init__ import _
 
 def main(session, **kwargs):
-	reload(SmartCtl)
+	# reload(SmartCtl)
 	try:
 		session.open(SmartCtl.SmartCtl)
 	except:

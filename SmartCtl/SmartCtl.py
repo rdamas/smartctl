@@ -4,21 +4,20 @@ from Components.Console import Console
 from Components.Label import Label
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.ScrollLabel import ScrollLabel
-from Components.Sources.StaticText import StaticText   
 from Screens.Screen import Screen
 
 from __init__ import _
 
 class SmartCtl(Screen):
-    version = "2016-08-05 0.1"
+    version = "2016-08-06 0.2"
     skin = """
         <screen name="SmartCtl" position="0,0" size="1920,1080" title="SmartCtl HDD Information" flags="wfNoBorder">
             <widget name="output" position="20,20" size="1880,920" font="Console;20" zPosition="1" />
             <widget name="chooseDevice" position="20,80" size="400,500" scrollbarMode="showOnDemand" zPosition="2" />
-            <widget source="key_red" render="Label" position="20,1000" zPosition="1" size="400,50" font="Regular;20" halign="center" valign="center" backgroundColor="#f01010" foregroundColor="#ffffff" transparent="0" />
+            <widget name="key_red" position="20,1000" zPosition="1" size="400,50" font="Regular;20" halign="center" valign="center" backgroundColor="#f01010" foregroundColor="#ffffff" transparent="0" />
             <widget name="key_green" position="500,1000" zPosition="1" size="400,50" font="Regular;20" halign="center" valign="center" backgroundColor="#10a010" foregroundColor="#ffffff" transparent="0" />
-            <widget source="key_yellow" render="Label" position="980,1000" zPosition="1" size="400,50" font="Regular;20" halign="center" valign="center" backgroundColor="#f0f010" foregroundColor="#303030" transparent="0" />
-            <!-- widget source="key_blue" render="Label" position="1460,1000" zPosition="1" size="400,50" font="Regular;20" halign="center" valign="center" backgroundColor="#0000e0" foregroundColor="#ffffff" transparent="0" / -->
+            <widget name="key_yellow" position="980,1000" zPosition="1" size="400,50" font="Regular;20" halign="center" valign="center" backgroundColor="#f0f010" foregroundColor="#303030" transparent="0" />
+            <!-- widget source="key_blue" position="1460,1000" zPosition="1" size="400,50" font="Regular;20" halign="center" valign="center" backgroundColor="#0000e0" foregroundColor="#ffffff" transparent="0" / -->
         </screen>
     """
     
@@ -38,15 +37,15 @@ class SmartCtl(Screen):
                 "blue":        self.blue,
         }, -1)
         
-	self["key_red"] = StaticText(_("HDD INFO"))
+	self["key_red"] = Label(_("HDD INFO"))
 	self["key_green"] = Label(_("SHOW ATTR"))
-	self["key_yellow"] = StaticText(_("CHOOSE DEVICE"))
-	# self["key_blue"] = StaticText(_("blue"))
+	self["key_yellow"] = Label(_("CHOOSE DEVICE"))
+	# self["key_blue"] = Label(_("blue"))
         
         self["output"] = ScrollLabel()
         
         self.getDevices()
-        self.chooseMenuList = ChoiceList(self.devices)
+        self.chooseMenuList = ChoiceList(self.devicesMenu)
         self["chooseDevice"] = self.chooseMenuList
         self.chooseMenuList.hide()
         
@@ -126,6 +125,7 @@ class SmartCtl(Screen):
     
     def getDevices(self):
         self.devices = []
+        self.devicesMenu = []
         mounted = open("/proc/mounts","r")
         for part in mounted:
             words = part.split()
@@ -133,7 +133,8 @@ class SmartCtl(Screen):
                 device = words[0]
                 device = device[0:8]
                 if not device in self.devices:
-                    self.devices.append( ChoiceEntryComponent(key=device, text=[device]) )
+                    self.devices.append( device )
+                    self.devicesMenu.append( ChoiceEntryComponent(key=device, text=[device]) )
         
     def getSmartCtlInformation(self,device):
         cmd = '/usr/sbin/smartctl -x %s' % (device,)
@@ -197,8 +198,11 @@ class SmartCtl(Screen):
                 self.dict["ATTR"] = []
                 self.dict["FATTR"] = []
         
-        if self.hasPotentialFailure:
-            self.dict["FATTR"].append("\nHDD has potential indicators of imminent electromechanical failure")
-        else:
-            self.dict["FATTR"].append("\nHDD seems ok.")
+        try:
+            if self.hasPotentialFailure:
+                self.dict["FATTR"].append("\nHDD has potential indicators of imminent electromechanical failure")
+            else:
+                self.dict["FATTR"].append("\nHDD seems ok.")
+        except:
+            pass
 

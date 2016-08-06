@@ -1,10 +1,10 @@
 Package: SmartCtl
 Priority: optional
-Version: 0.1
+Version: 0.2
 Architecture: all
 Maintainer: Robert Damas <rdamas>
 Depends: smartmontools
 Description: SmartCtl is a very simple frontend for displaying smartctl output
 Section: misc
-Homepage: https://github.com/rdamas/
+Homepage: https://github.com/rdamas/smartctl
 
