@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "Running update-smart-drivedb ..."
+/usr/sbin/update-smart-drivedb
