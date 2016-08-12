@@ -102,7 +102,10 @@ class SmartCtl(Screen):
     
     def red(self):
         if self.dict["INFO"]:
-            self["output"].setText("\n".join(str(x) for x in self.dict["INFO"]))
+            text = "\n".join(str(x) for x in self.dict["INFO"])
+            if self.dict["DATA"]:
+                text += "\n\n" + "\n".join(str(x) for x in self.dict["DATA"])
+            self["output"].setText(text)
             self["key_green"].setText(_("SHOW ATTR"))
             self.showAttr = True
     
@@ -142,7 +145,7 @@ class SmartCtl(Screen):
     
     def cmdSmartctlFinished(self, result, retval, extra=None):
         self.parseSmartInfo(result)
-        self["output"].setText("\n".join(str(x) for x in self.dict["INFO"]))
+        self.red()
 
     def parseInfoSection(self,line):
         words = map(str.strip,line.split(":"))
@@ -186,12 +189,19 @@ class SmartCtl(Screen):
             if section == "INFO":
                 # self.parseInfoSection(line)
                 self.dict["INFO"].append(line)
+            elif section == "DATA":
+                # self.parseInfoSection(line)
+                self.dict["DATA"].append(line)
             elif section == "ATTR":
                 self.parseAttrSection(line)
 
             if "START OF INFORMATION SECTION" in line:
                 section = "INFO"
                 self.dict["INFO"] = []
+            
+            if "START OF READ SMART DATA SECTION" in line:
+                section = "DATA"
+                self.dict["DATA"] = []
 
             if "Vendor Specific SMART Attributes" in line:
                 section = "ATTR"
