@@ -9,7 +9,7 @@ from Screens.Screen import Screen
 from __init__ import _
 
 class SmartCtl(Screen):
-    version = "2016-08-06 0.2"
+    version = "2017-03-24 0.2.1"
     skin = """
         <screen name="SmartCtl" position="0,0" size="1920,1080" title="SmartCtl HDD Information" flags="wfNoBorder">
             <widget name="output" position="20,20" size="1880,920" font="Console;20" zPosition="1" />
@@ -101,16 +101,18 @@ class SmartCtl(Screen):
         pass
     
     def red(self):
-        if self.dict["INFO"]:
+        try:
             text = "\n".join(str(x) for x in self.dict["INFO"])
             if self.dict["DATA"]:
                 text += "\n\n" + "\n".join(str(x) for x in self.dict["DATA"])
             self["output"].setText(text)
             self["key_green"].setText(_("SHOW ATTR"))
             self.showAttr = True
+        except:
+            pass
     
     def green(self):
-        if self.dict["ATTR"]:
+        try:
             if self.showAttr:
                 self["output"].setText("\n".join(str(x) for x in self.dict["ATTR"]))
                 self["key_green"].setText(_("SHOW CRITICAL ATTR"))
@@ -119,6 +121,8 @@ class SmartCtl(Screen):
                 self["output"].setText("\n".join(str(x) for x in self.dict["FATTR"]))
                 self["key_green"].setText(_("SHOW ATTR"))
                 self.showAttr = True
+        except:
+            pass
     
     def yellow(self):
         pass

@@ -2,7 +2,7 @@
 #######################################################################
 #
 #  SmartCtl
-#  Version 0.2
+#  Version 0.2.1
 #  Support: www.vuplus-support.org
 #
 #  Copyright (c) 2016 by Robert Damas

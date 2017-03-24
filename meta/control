@@ -1,6 +1,6 @@
 Package: SmartCtl
 Priority: optional
-Version: 0.2
+Version: 0.2.1
 Architecture: all
 Maintainer: Robert Damas <rdamas>
 Depends: smartmontools
