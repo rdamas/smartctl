@@ -12,6 +12,12 @@ The plugin reads the self test results from connected hard disks. I do not own a
 therefore I am not sure if the error log will be displayed correctly. If someone posts the output of 
 "smartctl -jl" I will fix it.
 
+![smart1a](https://user-images.githubusercontent.com/15088943/80868368-6379cb80-8c9a-11ea-9f1f-a16fc9c226f3.jpg)
+
+![smart2a](https://user-images.githubusercontent.com/15088943/80868371-6a084300-8c9a-11ea-9f95-50626754becf.jpg)
+
+![smart3a](https://user-images.githubusercontent.com/15088943/80868378-6f658d80-8c9a-11ea-87d4-0b6a5e10ced7.jpg)
+
 ## Interpretation of attributes:
 
 Modern hard disks use internal attributes to record their health state. Attributes are displayed using three items: "Value", "Worst", "Thresh":
