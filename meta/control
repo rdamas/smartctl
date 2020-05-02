@@ -1,0 +1,9 @@
+Package: enigma2-plugin-extensions-smartcontrol
+Version: 0.3.1
+Description: Graphical interface for smartctl
+Section: extra
+Priority: optional
+Maintainer: robert.damas@byom.de
+License: MIT
+Architecture: all
+Depends: smartmontools (>= 7.0), util-linux

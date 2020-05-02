@@ -1,0 +1,140 @@
+<!-- Skin-Part fuer CerxFHD -->
+<skin>
+    <screen name="SmartControlDevices" position="0,0" size="1920,1080" title="[SmartControl] Festplatte auswählen" flags="wfNoBorder">
+        <panel name="back_top" />
+        <panel name="back_top_wide" />
+        <panel name="back_type_1920" />
+        <panel name="back_bottom_small" />
+        <panel name="part_Title" />
+        <panel name="part_buttons_back" />
+        <widget name="list" position="20,120" size="720,800" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="selectedScrollFG" scrollbarSliderBorderColor="selectedScrollBG" backgroundColor="background" transparent="1" enableWrapAround="1" />
+    </screen>
+    
+    <screen name="SmartControlDevice" position="0,0" size="1920,1080" title="[SmartControl] Festplatte Informationen" flags="wfNoBorder">
+        <panel name="back_top" />
+        <panel name="back_top_wide" />
+        <panel name="back_type_1920" />
+        <panel name="back_bottom_small" />
+        <panel name="part_Title" />
+        <panel name="part_buttons_back" />
+        <panel name="part_buttons_rgy" />
+        <widget render="Listbox" source="deviceinfo" enableWrapAround="0"
+            position="0,100" size="1920,850" transparent="1"
+            font="Regular;25" zPosition="5" scrollbarMode="showOnDemand"
+            scrollbarSliderBorderWidth="0" scrollbarWidth="5">
+            <convert type="TemplatedMultiContent">{
+                "template": [
+                    MultiContentEntryText(
+                        pos = (30, 3),
+                        size = (440, 50),
+                        font = 0,
+                        flags = RT_HALIGN_RIGHT | RT_VALIGN_TOP,
+                        text = 0),
+                    MultiContentEntryText(
+                        pos = (500, 3),
+                        size = (1300, 50),
+                        font = 0,
+                        flags = RT_HALIGN_LEFT | RT_VALIGN_TOP,
+                        text = 1)
+                    ],
+                "fonts": [gFont("Regular", 36)],
+                "itemHeight": 50 }
+            </convert>
+        </widget>
+    </screen>
+
+    <screen name="SmartControlAttributes" position="0,0" size="1920,1080" title="[SmartControl] Festplatte Attribute" flags="wfNoBorder">
+        <panel name="back_top" />
+        <panel name="back_top_wide" />
+        <panel name="back_type_1920" />
+        <panel name="back_bottom_small" />
+        <panel name="part_Title" />
+        <panel name="part_buttons_back" />
+        <widget render="Listbox" source="deviceinfo" enableWrapAround="0"
+            position="0,100" size="1920,850" transparent="1"
+            font="Regular;25" zPosition="5" scrollbarMode="showOnDemand"
+            scrollbarSliderBorderWidth="0" scrollbarWidth="5">
+            <convert type="TemplatedMultiContent">{
+                "template": [
+                    MultiContentEntryText(
+                        pos = (10, 3),
+                        size = (140, 50),
+                        font = 0,
+                        flags = RT_HALIGN_RIGHT | RT_VALIGN_TOP,
+                        text = 0),
+                    MultiContentEntryText(
+                        pos = (165, 3),
+                        size = (500, 50),
+                        font = 0,
+                        flags = RT_HALIGN_LEFT | RT_VALIGN_TOP,
+                        text = 1),
+                    MultiContentEntryText(
+                        pos = (670, 3),
+                        size = (120, 50),
+                        font = 0,
+                        flags = RT_HALIGN_LEFT | RT_VALIGN_TOP,
+                        text = 2),
+                    MultiContentEntryText(
+                        pos = (795, 3),
+                        size = (220, 50),
+                        font = 0,
+                        flags = RT_HALIGN_RIGHT | RT_VALIGN_TOP,
+                        text = 3),
+                    MultiContentEntryText(
+                        pos = (1030, 3),
+                        size = (240, 50),
+                        font = 0,
+                        flags = RT_HALIGN_RIGHT | RT_VALIGN_TOP,
+                        text = 4),
+                    MultiContentEntryText(
+                        pos = (1285, 3),
+                        size = (240, 50),
+                        font = 0,
+                        flags = RT_HALIGN_RIGHT | RT_VALIGN_TOP,
+                        text = 5),
+                    MultiContentEntryText(
+                        pos = (1550, 3),
+                        size = (365, 50),
+                        font = 0,
+                        flags = RT_HALIGN_LEFT | RT_VALIGN_TOP,
+                        text = 6)
+                    ],
+                "fonts": [gFont("Regular", 36)],
+                "itemHeight": 50 }
+            </convert>
+        </widget>
+    </screen>
+
+    <screen name="SmartControlTestlogs" position="0,0" size="1920,1080" title="[SmartControl] Festplatten-Logs" flags="wfNoBorder">
+        <panel name="back_top" />
+        <panel name="back_top_wide" />
+        <panel name="back_type_1920" />
+        <panel name="back_bottom_small" />
+        <panel name="part_Title" />
+        <panel name="part_buttons_back" />
+        <widget render="Listbox" source="logs" enableWrapAround="0"
+            position="0,100" size="1920,850" transparent="1"
+            font="Regular;25" zPosition="5" scrollbarMode="showOnDemand"
+            scrollbarSliderBorderWidth="0" scrollbarWidth="5">
+            <convert type="TemplatedMultiContent">{
+                "template": [
+                    MultiContentEntryText(
+                        pos = (30, 3),
+                        size = (440, 50),
+                        font = 0,
+                        flags = RT_HALIGN_RIGHT | RT_VALIGN_TOP,
+                        text = 0),
+                    MultiContentEntryText(
+                        pos = (500, 3),
+                        size = (1300, 50),
+                        font = 0,
+                        flags = RT_HALIGN_LEFT | RT_VALIGN_TOP,
+                        text = 1)
+                    ],
+                "fonts": [gFont("Regular", 36)],
+                "itemHeight": 50 }
+            </convert>
+        </widget>
+    </screen>
+
+</skin>
