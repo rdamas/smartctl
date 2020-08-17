@@ -25,8 +25,6 @@
 #
 #######################################################################M
 
-from __future__ import unicode_literals
-
 from Plugins.Plugin import PluginDescriptor
 
 import Plugins.Extensions.SmartControl.Devices as Devices

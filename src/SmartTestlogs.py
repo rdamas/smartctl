@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 
 from Components.ActionMap import ActionMap
 from Components.Label import Label

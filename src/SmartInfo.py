@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Depends: smartctl
 
-from __future__ import print_function, unicode_literals
+from __future__ import print_function
 
 import subprocess
 import os
@@ -56,11 +56,13 @@ class SmartInfo(object):
                 table = attributes["ata_smart_attributes"]["table"]
                 self.attributes = []
                 for attr in table:
-                    if attr['when_failed'] == '':
-                        failed = 'ok'
-                    else:
+                    failed = 'ok'
+                    if 'when_failed' in attr and attr['when_failed'] != '':
                         failed = attr["when_failed"].encode('ascii')
-                    line = ( str(attr['id']), attr['name'].replace("_", " ").encode('ascii'), failed, str(attr["value"]), str(attr["worst"]), str(attr["thresh"]),  attr['raw']['string'].encode('ascii') )
+                    thresh = ''
+                    if 'tresh' in attr:
+                        tresh = str(attr[thresh])
+                    line = ( str(attr['id']), attr['name'].replace("_", " ").encode('ascii'), failed, str(attr["value"]), str(attr["worst"]), thresh,  attr['raw']['string'].encode('ascii') )
                     self.attributes.append(line)
     
     def __parseSelftestsLog(self):
