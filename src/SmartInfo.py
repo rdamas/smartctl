@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # Depends: smartctl
 
+from __future__ import print_function, unicode_literals
+
 import subprocess
 import os
 import stat
@@ -133,7 +135,7 @@ class SmartInfo(object):
         if self.device:
             cmd = [ "/usr/sbin/smartctl", "-t", "short", self.device ]
             out = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
-            print "[SmartControl]", out
+            print("[SmartControl]", out)
             self.selftests = []
     
     def getDeviceInformation(self):
@@ -166,4 +168,4 @@ class SmartInfo(object):
 
 if __name__ == "__main__":
     d = SmartInfo("sdb")
-    print d.getDeviceInformation()
+    print(d.getDeviceInformation())
