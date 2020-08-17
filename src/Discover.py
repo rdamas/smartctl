@@ -3,7 +3,7 @@
 
 from __future__ import print_function
 
-import Helper
+from . import Helper
 import re
 import sys
 
@@ -29,5 +29,6 @@ class Discover(object):
         return self.__devices
 
 if __name__ == "__main__":
+    import Helper
     d = Discover()
     print(d.devices())

@@ -31,16 +31,17 @@ import Plugins.Extensions.SmartControl.Devices as Devices
 # import Plugins.Extensions.SmartControl.SmartDevice as SmartDevice
 # import Plugins.Extensions.SmartControl.SmartAttributes as SmartAttributes
 
-from __init__ import _
+from . import _
 
 import os
 
 def main(session, **kwargs):
-    try:
-        session.open(Devices.Devices)
-    except:
-        import traceback
-        traceback.print_exc()
+#    try:
+        from .Devices import Devices
+        session.open(Devices)
+#    except:
+#        import traceback
+#        traceback.print_exc()
 
 def Plugins(**kwargs):
     return PluginDescriptor(

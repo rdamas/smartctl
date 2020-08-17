@@ -5,7 +5,7 @@ from Components.Label import Label
 from Components.Sources.List import List
 from Screens.Screen import Screen
 
-from SmartInfo import SmartInfo
+from .SmartInfo import SmartInfo
 
 class SmartAttributes(Screen):
     skin = """

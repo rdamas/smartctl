@@ -3,10 +3,10 @@
 
 from __future__ import print_function
 
-import Helper
+from . import Helper
+
 import os
 import stat
-import json
 import re
 import sys
 
@@ -51,7 +51,7 @@ class SmartInfo(object):
         if self.device:
             cmd = [ "/usr/sbin/smartctl", "-Aj", self.device ]
             out = Helper.sub_process(cmd)
-            attributes = json.loads(out)
+            attributes = Helper.json_loads(out)
 
             if attributes:
                 table = attributes["ata_smart_attributes"]["table"]
@@ -59,11 +59,11 @@ class SmartInfo(object):
                 for attr in table:
                     failed = 'ok'
                     if 'when_failed' in attr and attr['when_failed'] != '':
-                        failed = attr["when_failed"].encode('ascii')
+                        failed = attr["when_failed"]
                     thresh = ''
                     if 'tresh' in attr:
                         tresh = str(attr[thresh])
-                    line = ( str(attr['id']), attr['name'].replace("_", " ").encode('ascii'), failed, str(attr["value"]), str(attr["worst"]), thresh,  attr['raw']['string'].encode('ascii') )
+                    line = ( str(attr['id']), attr['name'].replace("_", " "), failed, str(attr["value"]), str(attr["worst"]), thresh,  attr['raw']['string'] )
                     self.attributes.append(line)
     
     def __parseSelftestsLog(self):
@@ -71,7 +71,7 @@ class SmartInfo(object):
             cmd = [ "/usr/sbin/smartctl", "-jl", "selftest", self.device ]
             out = Helper.sub_process(cmd)
             try:
-                selftests = json.loads(out)
+                selftests = Helper.json_loads(out)
                 logged = selftests["ata_smart_self_test_log"]["standard"]["table"]
                 for item in logged:
                     self.selftests.append( (item["type"]["string"].encode("ascii"), item["status"]["string"].encode("ascii") ) )
@@ -83,7 +83,7 @@ class SmartInfo(object):
             cmd = [ "/usr/sbin/smartctl", "-jl", "error", self.device ]
             out = Helper.sub_process(cmd)
             try:
-                selftests = json.loads(out)
+                selftests = Helper.json_loads(out)
                 logged = selftests["ata_smart_error_log"]["summary"]["table"]
                 for item in logged:
                     self.selftests.append( (item["type"]["string"].encode("ascii"), item["status"]["string"].encode("ascii") ) )
@@ -95,9 +95,9 @@ class SmartInfo(object):
             cmd = [ "/usr/sbin/smartctl", "-jc", self.device ]
             out = Helper.sub_process(cmd)
             try:
-                cap = json.loads(out)
+                cap = Helper.json_loads(out)
                 for c in cap["ata_smart_data"]["capabilities"]:
-                    self.capabilities[c.encode('ascii')] = cap["ata_smart_data"]["capabilities"][c]
+                    self.capabilities[c] = cap["ata_smart_data"]["capabilities"][c]
             except:
                 pass
             
@@ -170,5 +170,7 @@ class SmartInfo(object):
         return self.errors
 
 if __name__ == "__main__":
-    d = SmartInfo("sdb")
-    print(d.getDeviceInformation())
+    import Helper
+    d = SmartInfo("sda")
+    # print(d.getDeviceInformation())
+    print(d.getAttributes())

@@ -12,8 +12,8 @@ from enigma import eListboxPythonMultiContent, gFont, BT_SCALE
 
 import skin
 
-from Discover import Discover
-from SmartDevice import SmartDevice
+from .Discover import Discover
+from .SmartDevice import SmartDevice
 
 def DevicesEntryComponent(device):
     png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/SmartControl/icons/device.png"))

@@ -6,9 +6,9 @@ from Components.Sources.List import List
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 
-from SmartInfo import SmartInfo
-from SmartAttributes import SmartAttributes
-from SmartTestlogs import SmartTestlogs
+from .SmartInfo import SmartInfo
+from .SmartAttributes import SmartAttributes
+from .SmartTestlogs import SmartTestlogs
 
 class SmartDevice(Screen):
     skin = """
