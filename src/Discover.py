@@ -3,7 +3,7 @@
 
 from __future__ import print_function
 
-import subprocess
+import Helper
 import re
 import sys
 
@@ -12,10 +12,7 @@ class Discover(object):
     def __init__(self):
         self.__devices = []
         cmd = [ "/usr/bin/lsblk", "-SP" ]
-        if sys.version_info.major == 2:
-            out = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
-        else:
-            out = subprocess.Popen(cmd, stdout=subprocess.PIPE, encoding='utf-8').communicate()[0]
+        out = Helper.sub_process(cmd)
         self.__parse(out)
 
         

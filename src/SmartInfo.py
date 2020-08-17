@@ -3,7 +3,7 @@
 
 from __future__ import print_function
 
-import subprocess
+import Helper
 import os
 import stat
 import json
@@ -31,10 +31,7 @@ class SmartInfo(object):
     def __parseInformationSection(self):
         if self.device:
             cmd = [ "/usr/sbin/smartctl", "-i", self.device ]
-            if sys.version_info.major == 2:
-                lsblkOutput = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
-            else:
-                lsblkOutput = subprocess.Popen(cmd, stdout=subprocess.PIPE, encoding='utf-8').communicate()[0]
+            lsblkOutput = Helper.sub_process(cmd)
             
             inSection = False
             self.information = []
@@ -53,10 +50,7 @@ class SmartInfo(object):
     def __parseAttributesBlock(self):
         if self.device:
             cmd = [ "/usr/sbin/smartctl", "-Aj", self.device ]
-            if sys.version_info.major == 2:
-                out = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
-            else:
-                out = subprocess.Popen(cmd, stdout=subprocess.PIPE, encoding='utf-8').communicate()[0]
+            out = Helper.sub_process(cmd)
             attributes = json.loads(out)
 
             if attributes:
@@ -75,10 +69,7 @@ class SmartInfo(object):
     def __parseSelftestsLog(self):
         if self.device:
             cmd = [ "/usr/sbin/smartctl", "-jl", "selftest", self.device ]
-            if sys.version_info.major == 2:
-                out = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
-            else:
-                out = subprocess.Popen(cmd, stdout=subprocess.PIPE, encoding='utf-8').communicate()[0]
+            out = Helper.sub_process(cmd)
             try:
                 selftests = json.loads(out)
                 logged = selftests["ata_smart_self_test_log"]["standard"]["table"]
@@ -90,10 +81,7 @@ class SmartInfo(object):
     def __parseErrorLog(self):
         if self.device:
             cmd = [ "/usr/sbin/smartctl", "-jl", "error", self.device ]
-            if sys.version_info.major == 2:
-                out = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
-            else:
-                out = subprocess.Popen(cmd, stdout=subprocess.PIPE, encoding='utf-8').communicate()[0]
+            out = Helper.sub_process(cmd)
             try:
                 selftests = json.loads(out)
                 logged = selftests["ata_smart_error_log"]["summary"]["table"]
@@ -105,10 +93,7 @@ class SmartInfo(object):
     def __parseCapabilities(self):
         if self.device:
             cmd = [ "/usr/sbin/smartctl", "-jc", self.device ]
-            if sys.version_info.major:
-                out = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
-            else:
-                out = subprocess.Popen(cmd, stdout=subprocess.PIPE, encoding='utf-8').communicate()[0]
+            out = Helper.sub_process(cmd)
             try:
                 cap = json.loads(out)
                 for c in cap["ata_smart_data"]["capabilities"]:
@@ -132,10 +117,7 @@ class SmartInfo(object):
     def __canUseSmartctl(self):
         try:
             cmd = [ "/usr/sbin/smartctl", "-V", ]
-            if sys.version_info.major == 2:
-                out = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
-            else:
-                out = subprocess.Popen(cmd, stdout=subprocess.PIPE, encoding='utf-8').communicate()[0]
+            out = Helper.sub_process(cmd)
         except:
             self.information.append( ("Achtung!", '"smartmontools" ist nicht installiert oder defekt.') )
             return False
@@ -155,10 +137,7 @@ class SmartInfo(object):
     def startShortSelftest(self):
         if self.device:
             cmd = [ "/usr/sbin/smartctl", "-t", "short", self.device ]
-            if sys.version_info.major == 2:
-                out = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
-            else:
-                out = subprocess.Popen(cmd, stdout=subprocess.PIPE, encoding='utf-8').communicate()[0]
+            out = Helper.sub_process(cmd)
             print("[SmartControl]", out)
             self.selftests = []
     
