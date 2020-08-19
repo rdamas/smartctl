@@ -27,21 +27,13 @@
 
 from Plugins.Plugin import PluginDescriptor
 
-import Plugins.Extensions.SmartControl.Devices as Devices
-# import Plugins.Extensions.SmartControl.SmartDevice as SmartDevice
-# import Plugins.Extensions.SmartControl.SmartAttributes as SmartAttributes
-
 from . import _
+from . import Devices
 
 import os
 
 def main(session, **kwargs):
-#    try:
-        from .Devices import Devices
-        session.open(Devices)
-#    except:
-#        import traceback
-#        traceback.print_exc()
+    session.open(Devices.Devices)
 
 def Plugins(**kwargs):
     return PluginDescriptor(
