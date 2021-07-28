@@ -2,7 +2,7 @@
 #######################################################################
 #
 #  SmartControl
-#  Version 0.3
+#  Version 0.4
 #
 #  Copyright (c) 2020 by Robert Damas
 #  All rights reserved.

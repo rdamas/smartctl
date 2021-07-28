@@ -17,7 +17,7 @@
         <panel name="back_bottom_small" />
         <panel name="part_Title" />
         <panel name="part_buttons_back" />
-        <panel name="part_buttons_rgy" />
+        <panel name="part_buttons" />
         <widget render="Listbox" source="deviceinfo" enableWrapAround="0"
             position="0,100" size="1920,850" transparent="1"
             font="Regular;25" zPosition="5" scrollbarMode="showOnDemand"
