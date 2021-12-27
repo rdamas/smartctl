@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Helper functions to capsule Python2/Python3 differences
+# Depends: smartctl
 
 import json
 import subprocess

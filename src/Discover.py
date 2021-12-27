@@ -3,7 +3,11 @@
 
 from __future__ import print_function
 
-from . import Helper
+try:
+    from . import Helper
+except:
+    import Helper
+
 import re
 import sys
 
